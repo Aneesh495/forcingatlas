@@ -1,0 +1,41 @@
+# Private agent accounting and local ledgers
+.agent-local/
+
+# Session uploads are not part of the project
+uploads/
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+dist/
+build/
+
+# Acquired sources, checkpoints, and campaign evidence stay local
+data/
+evidence/
+checkpoints/
+tmp/
+
+# Web
+web/node_modules/
+web/.next/
+web/out/
+web/public/bundle/
+web/tsconfig.tsbuildinfo
+
+# Editor and OS
+.DS_Store
+*.swp
+
+# Raw climate files must not be committed even if they land outside data/
+*.nc
+*.nc4
+*.tar
+*.tar.gz
+*.zip
+!tests/fixtures/**

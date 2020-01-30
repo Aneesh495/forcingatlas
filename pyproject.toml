@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "forcing-atlas"
+version = "0.1.0"
+description = "Local-first workbench for observed climate change and conditional futures"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Forcing Atlas contributors" }]
+dependencies = [
+  "numpy>=1.26",
+  "xarray>=2024.1",
+  "netCDF4>=1.6",
+  "pyyaml>=6",
+  "torch>=2.2",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "matplotlib>=3.8"]
+
+[project.scripts]
+forcing-atlas = "forcing_atlas.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
