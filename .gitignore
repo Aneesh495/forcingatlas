@@ -3,6 +3,7 @@
 
 # Session uploads are not part of the project
 uploads/
+agent-tools/
 
 # Python
 .venv/

@@ -4,7 +4,7 @@ Updated 2026-11-11.
 
 ## Phase
 
-Foundation. Units, calendars, semantic identities, variable contracts, and the disk accountant are implemented and tested. Acquisition, the energy-balance solver, the emulator, the atlas, and the campaign are not implemented yet.
+Geometry. Units, calendars, identities, and spherical regridding are implemented and tested. Acquisition, the energy-balance solver, the emulator, the atlas, and the campaign are not implemented yet.
 
 ## Requirement index
 
@@ -17,7 +17,7 @@ Foundation. Units, calendars, semantic identities, variable contracts, and the d
 | F05 | Project byte cap on a measured tree | verified |
 | G01 | Source manifest with provenance and separate semantics | missing |
 | G02 | Calendar, unit, baseline, mask, and registration checks on real files | missing |
-| G03 | Regridding and area weights against analytical cases | missing |
+| G03 | Regridding and area weights against analytical cases | verified |
 | G04 | Two instrumental products and a proxy calibration study | missing |
 | G05 | Energy-balance solver against closed forms and energy storage | missing |
 | G06 | Forcing adapter rejects bad units and double counting | missing |
@@ -35,6 +35,7 @@ Foundation. Units, calendars, semantic identities, variable contracts, and the d
 ## Commands actually run
 
 - `.venv/bin/python -m pytest tests -q` passed after the foundation landed (41 tests).
+- `.venv/bin/python -m pytest tests/test_geometry.py -q` passed (13 tests) after the area and remap fixes.
 
 ## Data identities
 
@@ -42,4 +43,4 @@ No source file has been acquired into `data/` yet. Pinned URLs are recorded in t
 
 ## Next action
 
-Implement spherical cell areas, longitude conventions, and conservative regridding, with analytical tests that do not call the regridder to build their expected integrals.
+Implement chunked cubes, the byte-capped streaming acquirer, and readers for the pinned HadCRUT, Berkeley Earth, PAGES 2k, and IGCC tables.

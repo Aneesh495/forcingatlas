@@ -6,7 +6,7 @@ The science code lives in `src/forcing_atlas`. The atlas interface is added on t
 
 ## What runs now
 
-Units, calendars, dataset semantics, and the variable contracts are in place and covered by tests. Later sections of this file will name the acquisition, energy-balance, emulator, and atlas commands as those paths become runnable. They are not runnable yet.
+Units, calendars, dataset semantics, variable contracts, cell areas, and conservative regridding are in place and covered by tests. Later sections of this file will name the acquisition, energy-balance, emulator, and atlas commands as those paths become runnable. They are not runnable yet.
 
 Supported calendars are proleptic Gregorian (aliases `gregorian` and `standard`), `noleap`, `all_leap`, and `360_day`. Temperature anomalies are a different kind from absolute temperature. Emissions, concentrations, radiative forcing, heat content, rainfall, and sea level are different variables and the contracts refuse to relabel one as another.
 
