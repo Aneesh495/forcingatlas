@@ -4,7 +4,7 @@ Updated 2026-11-11.
 
 ## Phase
 
-Geometry. Units, calendars, identities, and spherical regridding are implemented and tested. Acquisition, the energy-balance solver, the emulator, the atlas, and the campaign are not implemented yet.
+Acquisition and text readers. Geometry, units, calendars, pinned-source readers, chunked cubes, resumable downloads, and zip-member extraction are tested. The energy-balance solver, emulator, atlas, and campaign are not implemented yet.
 
 ## Requirement index
 
@@ -15,8 +15,8 @@ Geometry. Units, calendars, identities, and spherical regridding are implemented
 | F03 | Dataset semantics and forbidden observation mixes | verified |
 | F04 | Variable contracts and substitution refusals | verified |
 | F05 | Project byte cap on a measured tree | verified |
-| G01 | Source manifest with provenance and separate semantics | missing |
-| G02 | Calendar, unit, baseline, mask, and registration checks on real files | missing |
+| G01 | Source manifest with provenance and separate semantics | implemented_untested |
+| G02 | Calendar, unit, baseline, mask, and registration checks on real files | implemented_untested |
 | G03 | Regridding and area weights against analytical cases | verified |
 | G04 | Two instrumental products and a proxy calibration study | missing |
 | G05 | Energy-balance solver against closed forms and energy storage | missing |
@@ -28,7 +28,7 @@ Geometry. Units, calendars, identities, and spherical regridding are implemented
 | G11 | Sensitivity, uncertainty decomposition, ensemble weights | missing |
 | G12 | Side-by-side pathways without unsupported layers | missing |
 | G13 | Atlas with legends, time, region drill-down, export parity | missing |
-| G14 | Bounded acquisition, restart, disk accounting under the cap | missing |
+| G14 | Bounded acquisition, restart, disk accounting under the cap | implemented_untested |
 | G15 | Thesis and ten linked studies reconciled to evidence | missing |
 | G16 | Verifier rejects wrong baseline, fake proxy, member leakage, forcing sign, scenario units | missing |
 
@@ -36,6 +36,7 @@ Geometry. Units, calendars, identities, and spherical regridding are implemented
 
 - `.venv/bin/python -m pytest tests -q` passed after the foundation landed (41 tests).
 - `.venv/bin/python -m pytest tests/test_geometry.py -q` passed (13 tests) after the area and remap fixes.
+- `.venv/bin/python -m pytest tests -q` passed (67 tests) after the readers, cube, zip member, and resume checks. Real source files are not in `data/` yet, so G01 and G02 are not closed.
 
 ## Data identities
 
@@ -43,4 +44,4 @@ No source file has been acquired into `data/` yet. Pinned URLs are recorded in t
 
 ## Next action
 
-Implement chunked cubes, the byte-capped streaming acquirer, and readers for the pinned HadCRUT, Berkeley Earth, PAGES 2k, and IGCC tables.
+Implement the two-reservoir energy-balance solver against the closed forms in `docs/NUMERICAL_CONTRACTS.md`, then the carbon-cycle impulse response and the forcing adapter.
