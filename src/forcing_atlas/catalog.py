@@ -34,6 +34,7 @@ class PinnedSource:
     time_label: TimeLabel = TimeLabel.YEAR_START
     byte_size: int | None = None
     checksum_md5: str | None = None
+    checksum_sha256: str | None = None
     license_note: str = ""
     unit_note: str = ""
     group: str = "core"
@@ -79,7 +80,7 @@ def _hadcrut_csv(region: str, kind: str) -> PinnedSource:
         version=HADCRUT_VERSION,
         variable="tas_anomaly",
         unit="degC_anomaly",
-        license_id="crown-copyright-met-office",
+        license_id="ogl-v3.0",
         url=f"{HADCRUT_ROOT}/{folder}/{name}",
         citation=HADCRUT_CITATION,
         file_name=name,
@@ -87,8 +88,9 @@ def _hadcrut_csv(region: str, kind: str) -> PinnedSource:
         calendar="proleptic_gregorian",
         time_label=TimeLabel.YEAR_START,
         license_note=(
-            "Crown Copyright, Met Office Hadley Centre. The 5.1.0.0 download page states Crown Copyright. "
-            "The file is acquired locally and is not redistributed in this repository."
+            "The HadCRUT.5.1.0.0 NetCDF attribute states the Open Government Licence v3.0. "
+            "The download page footer also states Crown Copyright. "
+            "Files are acquired locally and are not redistributed in this repository."
         ),
         unit_note="Anomaly in deg C relative to 1961-1990. Summary limits are the 2.5 and 97.5 percent levels.",
         group="instrumental",
@@ -108,7 +110,7 @@ PINNED: tuple[PinnedSource, ...] = (
         version=HADCRUT_VERSION,
         variable="tas_anomaly",
         unit="degC_anomaly",
-        license_id="crown-copyright-met-office",
+        license_id="ogl-v3.0",
         url=f"{HADCRUT_ROOT}/analysis/diagnostics/{HADCRUT_VERSION}.analysis.ensemble_series.global.annual.csv",
         citation=HADCRUT_CITATION,
         file_name=f"{HADCRUT_VERSION}.analysis.ensemble_series.global.annual.csv",
@@ -116,7 +118,7 @@ PINNED: tuple[PinnedSource, ...] = (
         calendar="proleptic_gregorian",
         member_role=MemberRole.UNCERTAINTY_ENSEMBLE,
         time_label=TimeLabel.YEAR_START,
-        license_note="Crown Copyright. Uncertainty members are one analysis, not independent models.",
+        license_note="Open Government Licence v3.0, as stated on the HadCRUT.5.1.0.0 NetCDF attribute. Uncertainty members are one analysis, not independent models.",
         unit_note=(
             "Realizations are the 200-member analysis ensemble. "
             "The coverage uncertainty column is one standard deviation, not the 2.5 to 97.5 percent summary interval."
@@ -131,7 +133,7 @@ PINNED: tuple[PinnedSource, ...] = (
         version=HADCRUT_VERSION,
         variable="tas_anomaly",
         unit="degC_anomaly",
-        license_id="crown-copyright-met-office",
+        license_id="ogl-v3.0",
         url=f"{HADCRUT_ROOT}/analysis/{HADCRUT_VERSION}.analysis.anomalies.ensemble_mean.nc",
         citation=HADCRUT_CITATION,
         file_name=f"{HADCRUT_VERSION}.analysis.anomalies.ensemble_mean.nc",
@@ -140,7 +142,7 @@ PINNED: tuple[PinnedSource, ...] = (
         grid_label="5x5",
         byte_size=32_829_594,
         time_label=TimeLabel.YEAR_MIDPOINT,
-        license_note="Crown Copyright. The analysis grid infills unobserved cells. It is not the non-infilled field.",
+        license_note="Open Government Licence v3.0 per the file attribute. The analysis grid infills unobserved cells. It is not the non-infilled field.",
         group="instrumental",
     ),
     PinnedSource(
@@ -151,7 +153,7 @@ PINNED: tuple[PinnedSource, ...] = (
         version=HADCRUT_VERSION,
         variable="tas_anomaly",
         unit="degC_anomaly",
-        license_id="crown-copyright-met-office",
+        license_id="ogl-v3.0",
         url=f"{HADCRUT_ROOT}/non-infilled/{HADCRUT_VERSION}.noninfilled.anomalies.ensemble_mean.nc",
         citation=HADCRUT_CITATION,
         file_name=f"{HADCRUT_VERSION}.noninfilled.anomalies.ensemble_mean.nc",
@@ -160,7 +162,7 @@ PINNED: tuple[PinnedSource, ...] = (
         grid_label="5x5",
         byte_size=24_107_871,
         time_label=TimeLabel.YEAR_MIDPOINT,
-        license_note="Crown Copyright. Empty cells are unobserved. They are not zeros.",
+        license_note="Open Government Licence v3.0 per the file attribute. Empty cells are unobserved. They are not zeros.",
         group="instrumental",
     ),
     PinnedSource(
@@ -287,8 +289,14 @@ PINNED: tuple[PinnedSource, ...] = (
         citation=IGCC_CITATION,
         file_name="ghg_concentrations.csv",
         time_label=TimeLabel.YEAR_START,
-        checksum_md5="10a4d4d1a27d07bc16007c368dfa6741",
-        unit_note="CO2 in ppm. CH4 and N2O in ppb. Other gases in ppt. Not a radiative forcing.",
+        byte_size=82_839,
+        checksum_sha256="ce066f25c546ad1a4dbb7cdbab15d9f3eab4049d26552847967b4d71298d4c8e",
+        unit_note=(
+            "CO2 in ppm. CH4 and N2O in ppb. Other gases in ppt. Not a radiative forcing. "
+            "The v2024.05.29b metadata yaml records md5 10a4d4d1a27d07bc16007c368dfa6741 and 57833 bytes. "
+            "The file at the pinned URL was 82839 bytes with sha256 "
+            "ce066f25c546ad1a4dbb7cdbab15d9f3eab4049d26552847967b4d71298d4c8e. The yaml checksum is not used."
+        ),
         group="forcing",
     ),
     PinnedSource(

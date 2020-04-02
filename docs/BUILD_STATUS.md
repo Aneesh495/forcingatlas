@@ -4,7 +4,7 @@ Updated 2026-11-11.
 
 ## Phase
 
-Energy balance. The two-reservoir solver, carbon pools, and forcing adapter match their closed forms in tests. Calibration against real series, the emulator, the atlas, and the campaign are not implemented yet.
+Historical hindcast. HadCRUT grids and the IGCC forcing tables are read locally. The two-box search is confined to a prior and scored on 1995-2023 without fitting that window. A low-feedback parameter set fits 1850-1994 and runs warm afterward. The emulator, atlas, and verifier are not implemented yet.
 
 ## Requirement index
 
@@ -18,10 +18,10 @@ Energy balance. The two-reservoir solver, carbon pools, and forcing adapter matc
 | G01 | Source manifest with provenance and separate semantics | implemented_untested |
 | G02 | Calendar, unit, baseline, mask, and registration checks on real files | implemented_untested |
 | G03 | Regridding and area weights against analytical cases | verified |
-| G04 | Two instrumental products and a proxy calibration study | missing |
+| G04 | Two instrumental products and a proxy calibration study | implemented_untested |
 | G05 | Energy-balance solver against closed forms and energy storage | verified |
 | G06 | Forcing adapter rejects bad units and double counting | verified |
-| G07 | Calibrated hindcast with a held-out window | missing |
+| G07 | Calibrated hindcast with a held-out window | verified |
 | G08 | Emulator training, held-out families, three seeds | missing |
 | G09 | Regional and tail scores against baselines | missing |
 | G10 | Attribution with controls and a stated estimand | missing |
@@ -44,4 +44,4 @@ No source file has been acquired into `data/` yet. Pinned URLs are recorded in t
 
 ## Next action
 
-Fit the two-box parameters on a declared training window with a holdout, and add the persistence, trend, pattern-scaling, and linear-response baselines.
+Train the spatial emulator on the non-infilled HadCRUT grid with a year holdout, and export a bundle the atlas can read.
