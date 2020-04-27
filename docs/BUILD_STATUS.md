@@ -4,7 +4,7 @@ Updated 2026-11-11.
 
 ## Phase
 
-Historical hindcast. HadCRUT grids and the IGCC forcing tables are read locally. The two-box search is confined to a prior and scored on 1995-2023 without fitting that window. A low-feedback parameter set fits 1850-1994 and runs warm afterward. The emulator, atlas, and verifier are not implemented yet.
+Atlas. The frozen bundle and the map are served from the web app. The two-box hindcast, proxy badge, and natural-only series are in that bundle. A full multi-model emulator campaign and the independent evidence verifier are not finished.
 
 ## Requirement index
 
@@ -27,7 +27,7 @@ Historical hindcast. HadCRUT grids and the IGCC forcing tables are read locally.
 | G10 | Attribution with controls and a stated estimand | missing |
 | G11 | Sensitivity, uncertainty decomposition, ensemble weights | missing |
 | G12 | Side-by-side pathways without unsupported layers | missing |
-| G13 | Atlas with legends, time, region drill-down, export parity | missing |
+| G13 | Atlas with legends, time, region drill-down, export parity | implemented_untested |
 | G14 | Bounded acquisition, restart, disk accounting under the cap | implemented_untested |
 | G15 | Thesis and ten linked studies reconciled to evidence | missing |
 | G16 | Verifier rejects wrong baseline, fake proxy, member leakage, forcing sign, scenario units | missing |
@@ -44,4 +44,4 @@ No source file has been acquired into `data/` yet. Pinned URLs are recorded in t
 
 ## Next action
 
-Train the spatial emulator on the non-infilled HadCRUT grid with a year holdout, and export a bundle the atlas can read.
+Run the three-seed emulator on the non-infilled grid with 1995-2023 held out, and add the independent verifier's semantic negative controls.
