@@ -80,8 +80,19 @@ def conservation_penalty(field: torch.Tensor, global_response: torch.Tensor, are
 
 
 def masked_mse(field: torch.Tensor, target: torch.Tensor, mask: torch.Tensor) -> torch.Tensor:
-    """Mean squared error on cells where `mask` is true. Empty masks raise."""
+    """Mean squared error on cells where `mask` is true. Empty masks raise.
 
+    A field shaped (batch, 1, lat, lon) is the network output. The target is
+    (batch, lat, lon). The singleton channel is removed here so the batch axis
+    is not broadcast against latitude.
+    """
+
+    if field.dim() == target.dim() + 1 and field.shape[1] == 1:
+        field = field.squeeze(1)
+    if field.shape != target.shape or mask.shape != target.shape:
+        raise CalibrationError(
+            f"emulator loss shapes field {tuple(field.shape)} target {tuple(target.shape)} mask {tuple(mask.shape)}"
+        )
     weights = mask.to(field.dtype)
     denom = torch.sum(weights)
     if float(denom) <= 0.0:

@@ -191,6 +191,20 @@ def stream_download(
     return DownloadResult(dest, written, sha, resumed, url)
 
 
+def read_span(url: str, start: int, end_inclusive: int, *, timeout_s: float = 120.0, chunk_bytes: int = 4_000_000) -> bytes:
+    """Read a byte span in capped requests and concatenate them in order."""
+
+    if end_inclusive < start:
+        raise AcquisitionError("empty byte range")
+    pieces: list[bytes] = []
+    cursor = start
+    while cursor <= end_inclusive:
+        stop = min(end_inclusive, cursor + chunk_bytes - 1)
+        pieces.append(read_range(url, cursor, stop, timeout_s=timeout_s))
+        cursor = stop + 1
+    return b"".join(pieces)
+
+
 def read_range(url: str, start: int, end_inclusive: int, *, timeout_s: float = 60.0) -> bytes:
     """HTTP byte range. `end_inclusive` follows the HTTP Range header."""
 
@@ -206,11 +220,11 @@ def read_range(url: str, start: int, end_inclusive: int, *, timeout_s: float = 6
     try:
         with urllib.request.urlopen(request, timeout=timeout_s) as response:
             status = getattr(response, "status", 200)
-            if status not in (200, 206):
-                raise AcquisitionError(f"range request returned HTTP {status}")
+            if status != 206:
+                raise AcquisitionError(f"range request returned HTTP {status}, expected 206")
             payload = response.read(length + 1)
     except urllib.error.URLError as exc:
         raise AcquisitionError(f"range request failed: {exc}") from exc
-    if len(payload) > length:
-        raise AcquisitionError("range response is longer than requested")
+    if len(payload) != length:
+        raise AcquisitionError(f"range response is {len(payload)} bytes, expected {length}")
     return payload

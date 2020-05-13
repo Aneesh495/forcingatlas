@@ -20,6 +20,7 @@ build/
 data/
 evidence/
 checkpoints/
+results/checkpoints/
 tmp/
 
 # Web

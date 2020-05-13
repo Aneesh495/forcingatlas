@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import numpy as np
+import pytest
 import torch
 
 from forcing_atlas.emulator import SpatialEmulator, new_emulator, predict, support_radius, train_emulator, TrainConfig
@@ -26,6 +27,17 @@ def _problem(seed: int = 3):
     weights = np.cos(np.linspace(-1, 1, nlat))[:, None] * np.ones((1, nlon))
     weights = weights / weights.sum()
     return window, forcing, target, latitude, longitude, weights
+
+
+def test_loss_does_not_broadcast_time_against_space() -> None:
+    import torch
+    from forcing_atlas.emulator import masked_mse
+
+    field = torch.zeros(4, 1, 3, 5)
+    target = torch.ones(4, 3, 5)
+    mask = torch.ones(4, 3, 5, dtype=torch.bool)
+    loss = masked_mse(field, target, mask)
+    assert float(loss) == pytest.approx(1.0)
 
 
 def test_training_changes_parameters_and_lowers_loss(tmp_path) -> None:

@@ -85,7 +85,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="forcing-atlas")
     parser.add_argument(
         "command",
-        choices=["acquire", "calibrate", "hindcast", "scenario", "export-atlas", "walkthrough", "train"],
+        choices=["acquire", "calibrate", "hindcast", "scenario", "export-atlas", "walkthrough", "train", "cmip-sample"],
     )
     parser.add_argument("--particles", type=int, default=16)
     args = parser.parse_args(argv)
@@ -123,8 +123,22 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "walkthrough":
         return _walkthrough()
     if args.command == "train":
-        print("Diagnostic training is the emulator unit test. A full three-seed spatial campaign is not this command.")
-        return 2
+        from forcing_atlas.evidence_export import git_head, write_evidence
+        from forcing_atlas.grid_campaign import run_grid_campaign
+
+        campaign_path = Path("results/grid_campaign.json")
+        campaign = run_grid_campaign(_root(), campaign_path, epochs=30)
+        evidence = write_evidence(_root(), campaign, Path("results/evidence.json"), source_commit=git_head())
+        print(json.dumps({"campaign": str(campaign_path), "evidence": str(evidence), "beats_uniform_trend": campaign["beats_uniform_trend"], "seeds": campaign["seeds"]}, indent=2))
+        return 0
+    if args.command == "cmip-sample":
+        from forcing_atlas.catalog import CMIP6_TAS_MEMBERS, cmip6_member_name
+        from forcing_atlas.cmip_fetch import describe_calendars, fetch_tas_members
+
+        names = [cmip6_member_name(entry) for entry in CMIP6_TAS_MEMBERS if entry["experiment"] == "ssp245" and entry["source_id"] in {"CanESM5", "MIROC6", "MPI-ESM1-2-LR", "HadGEM3-GC31-LL"}]
+        paths = fetch_tas_members(Path("data/raw/cmip6"), names)
+        print(json.dumps(describe_calendars(paths), indent=2))
+        return 0
     return 2
 
 

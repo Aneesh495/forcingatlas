@@ -97,6 +97,12 @@ def decode_member(local_blob: bytes, member: ZipMember) -> bytes:
     )
     if method != member.method:
         raise AcquisitionError(f"{member.name} local method {method} disagrees with the directory")
+    # Bit 3 of the general-purpose flag puts the sizes in a data descriptor.
+    # The local header then carries zeros, and the central directory is the size source.
+    if compressed == 0:
+        compressed = member.compressed_size
+    if uncompressed == 0:
+        uncompressed = member.uncompressed_size
     data_start = 30 + name_len + extra_len
     payload = local_blob[data_start : data_start + compressed]
     if len(payload) != compressed:
