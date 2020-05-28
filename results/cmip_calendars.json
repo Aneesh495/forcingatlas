@@ -1,0 +1,39 @@
+{
+  "source": "ClimateBench CMIP6.zip 10.5281/zenodo.7064308",
+  "experiment": "ssp245",
+  "note": "Annual near-surface air temperature. Calendars are the NetCDF time attributes, not the years in the filename. This zip's multi-model files are ssp245 and piControl. Other pathways were not in the archive and were not invented.",
+  "files": [
+    {
+      "file": "tas_Ayr_CanESM5_ssp245_r1i1p1f1_gn_2015-2100.nc",
+      "source_id": "CanESM5",
+      "member": "r1i1p1f1",
+      "calendar": "365_day",
+      "time_units": "days since 1850-01-01 0:0:0.0",
+      "shape": [86, 64, 128]
+    },
+    {
+      "file": "tas_Ayr_MIROC6_ssp245_r1i1p1f1_gn_2015-2100.nc",
+      "source_id": "MIROC6",
+      "member": "r1i1p1f1",
+      "calendar": "gregorian",
+      "time_units": "days since 1850-1-1",
+      "shape": [86, 128, 256]
+    },
+    {
+      "file": "tas_Ayr_MPI-ESM1-2-LR_ssp245_r1i1p1f1_gn_2015-2100.nc",
+      "source_id": "MPI-ESM1-2-LR",
+      "member": "r1i1p1f1",
+      "calendar": "proleptic_gregorian",
+      "time_units": "days since 1850-1-1 00:00:00",
+      "shape": [86, 96, 192]
+    },
+    {
+      "file": "tas_Ayr_HadGEM3-GC31-LL_ssp245_r1i1p1f3_gn_2015-2100.nc",
+      "source_id": "HadGEM3-GC31-LL",
+      "member": "r1i1p1f3",
+      "calendar": "360_day",
+      "time_units": "days since 1850-01-01",
+      "shape": [86, 144, 192]
+    }
+  ]
+}

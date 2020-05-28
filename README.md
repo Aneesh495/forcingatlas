@@ -46,8 +46,16 @@ Code in this repository is MIT. HadCRUT5.1.0.0 states the Open Government Licenc
 
 The IGCC concentration metadata yaml records an md5 and a size that do not match the file at the pinned URL. The catalog records the sha256 of the bytes that were read.
 
+## Grid fit
+
+`python -m forcing_atlas.cli train` fits the spatial emulator on the non-infilled HadCRUT grid for seeds 11, 29, and 47. Years through 1994 are the training rows. 1995-2023 is scored and is not in the loss. On that holdout the three area-weighted root-mean-square errors are 0.78 K, 0.74 K, and 0.70 K. A latitude-uniform trend fit on the same training years scores 0.80 K. The best seed beats that trend. The gain is small, and 2023 is outside the training forcing radius so the emulator abstains there. Checkpoints stay local. `results/grid_campaign.json` and `results/evidence.json` record the split and the scores.
+
+`python -m forcing_atlas_verify --evidence results/evidence.json --expect-commit <source-commit>` recomputes the mean of the three seed scores. It rejects a baseline whose window mean is not near zero, a proxy record labeled as an observation, a holdout year present in the training list, a positive volcanic forcing in 1992, and an absolute temperature unit on anomaly-sized scenario values.
+
+## Source-model sample
+
+`python -m forcing_atlas.cli cmip-sample` reads four ssp245 annual `tas` files out of the ClimateBench zip without storing the zip. Their calendars are 365-day (CanESM5), Gregorian (MIROC6), proleptic Gregorian (MPI-ESM1-2-LR), and 360-day (HadGEM3-GC31-LL). That archive does not contain the other future pathways for those models. They are not filled in.
+
 ## Limits
 
-ClimateBench members and a three-seed spatial campaign on the HadCRUT grid are not in the default export. The emulator module trains on caller-supplied rows and abstains outside a training radius. Its unit tests cover that behavior. A full multi-model campaign is not claimed.
-
-The energy inventory file is heat content in zettajoules even though the filename says imbalance. It is not used as a flux inside the fit.
+The atlas bundle is still the global hindcast plus the non-infilled map. It does not yet draw the emulator field or the CMIP grids. There is no attribution study and no ten-study thesis. The energy inventory file is heat content in zettajoules even though the filename says imbalance. It is not used as a flux inside the fit.

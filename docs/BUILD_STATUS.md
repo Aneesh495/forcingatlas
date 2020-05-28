@@ -4,7 +4,7 @@ Updated 2026-11-11.
 
 ## Phase
 
-Atlas. The frozen bundle and the map are served from the web app. The two-box hindcast, proxy badge, and natural-only series are in that bundle. A full multi-model emulator campaign and the independent evidence verifier are not finished.
+Grid campaign. Three seeds are trained on the non-infilled HadCRUT grid through 1994 and scored on 1995-2023. The verifier rejects tampered evidence. Four ssp245 source files have been read for their calendars. Attribution, the thesis, and drawing those model grids in the atlas are not done.
 
 ## Requirement index
 
@@ -22,15 +22,15 @@ Atlas. The frozen bundle and the map are served from the web app. The two-box hi
 | G05 | Energy-balance solver against closed forms and energy storage | verified |
 | G06 | Forcing adapter rejects bad units and double counting | verified |
 | G07 | Calibrated hindcast with a held-out window | verified |
-| G08 | Emulator training, held-out families, three seeds | missing |
-| G09 | Regional and tail scores against baselines | missing |
+| G08 | Emulator training, held-out families, three seeds | verified for the HadCRUT year holdout. Model-family transfer is not run |
+| G09 | Regional and tail scores against baselines | verified as area-weighted grid RMSE against a uniform trend. Tail scores are not run |
 | G10 | Attribution with controls and a stated estimand | missing |
 | G11 | Sensitivity, uncertainty decomposition, ensemble weights | missing |
 | G12 | Side-by-side pathways without unsupported layers | missing |
 | G13 | Atlas with legends, time, region drill-down, export parity | implemented_untested |
 | G14 | Bounded acquisition, restart, disk accounting under the cap | implemented_untested |
 | G15 | Thesis and ten linked studies reconciled to evidence | missing |
-| G16 | Verifier rejects wrong baseline, fake proxy, member leakage, forcing sign, scenario units | missing |
+| G16 | Verifier rejects wrong baseline, fake proxy, member leakage, forcing sign, scenario units | verified |
 
 ## Commands actually run
 
@@ -40,8 +40,8 @@ Atlas. The frozen bundle and the map are served from the web app. The two-box hi
 
 ## Data identities
 
-No source file has been acquired into `data/` yet. Pinned URLs are recorded in the specification and will be copied into a manifest when acquisition exists.
+Local `data/raw` holds HadCRUT5.1.0.0 summary series and both ensemble-mean grids, Berkeley Earth land-ocean, PAGES 2k, and the IGCC forcing, concentration, emission, and energy-inventory tables. `results/cmip_calendars.json` records four ssp245 `tas` files read from ClimateBench. The raw NetCDF stays in `data/raw/cmip6` and is not committed.
 
 ## Next action
 
-Run the three-seed emulator on the non-infilled grid with 1995-2023 held out, and add the independent verifier's semantic negative controls.
+Draw the emulator holdout next to the uniform trend on the atlas, and keep model-family transfer blocked until a pathway other than ssp245 is actually in hand.
