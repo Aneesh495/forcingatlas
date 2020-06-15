@@ -53,7 +53,7 @@ export function AtlasApp() {
     if (!playing || !bundle) return;
     const timer = window.setInterval(() => {
       setYear((current) => {
-        const next = current + 1;
+        const next = current < 1850 ? 1850 : current + 1;
         return next > 2100 ? 1850 : next;
       });
     }, 180);
@@ -157,15 +157,35 @@ export function AtlasApp() {
             <Button variant="outline" onClick={() => setGlobe((current) => !current)}>
               {globe ? "Flat map" : "Globe"}
             </Button>
+            <Button variant="outline" size="sm" onClick={() => setYear((current) => Math.max(1, current - 1))} aria-label="Previous year">
+              Previous
+            </Button>
+            <Button variant="outline" size="sm" onClick={() => setYear((current) => Math.min(2100, current + 1))} aria-label="Next year">
+              Next
+            </Button>
             <label className="flex items-center gap-2 text-sm">
-              <span>{year}</span>
+              <span className="sr-only">Year</span>
               <input
-                type="range"
+                type="number"
                 min={1}
                 max={2100}
                 value={year}
-                onChange={(event) => setYear(Number(event.target.value))}
+                onChange={(event) => {
+                  const next = Number(event.target.value);
+                  if (Number.isFinite(next)) setYear(Math.min(2100, Math.max(1, Math.round(next))));
+                }}
+                className="w-20 rounded border border-line bg-paper px-2 py-1"
                 aria-label="Year"
+              />
+              <input
+                type="range"
+                min={1850}
+                max={2100}
+                step={1}
+                value={Math.min(2100, Math.max(1850, year))}
+                onChange={(event) => setYear(Number(event.target.value))}
+                aria-label="Year from 1850 to 2100"
+                className="w-56"
               />
             </label>
           </div>
