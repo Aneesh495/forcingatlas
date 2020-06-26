@@ -1,0 +1,223 @@
+[
+  {
+    "id": "S01",
+    "title": "HadCRUT and Berkeley Earth on one baseline",
+    "claim": "After shifting Berkeley from 1951-1980 onto 1961-1990, the two annual series agree more closely than either agrees with an unrebased comparison.",
+    "result": "On 1880-2020 the rebased root-mean-square difference is 0.050 K.",
+    "limit": "Berkeley Earth land-ocean uses HadSST. Agreement over the ocean is not two independent observations.",
+    "metrics": {
+      "rmse_k": 0.04980793648581879,
+      "years": 141
+    },
+    "sources": [
+      "HadCRUT.5.1.0.0 analysis global annual",
+      "Berkeley Earth Land_and_Ocean_complete.txt"
+    ]
+  },
+  {
+    "id": "S02",
+    "title": "Baseline window changes the reported warming",
+    "claim": "The same HadCRUT series reads as a different warming when the zero is 1850-1900 rather than 1961-1990.",
+    "result": "Mean anomaly 1995-2023 versus 1961-1990 is 0.620 K. The 1850-1900 mean of the published series is -0.357 K, so the same recent window is 0.977 K above 1850-1900.",
+    "limit": "1850-1900 is a warming reference, not a preindustrial control run.",
+    "metrics": {
+      "recent_vs_1961_1990_k": 0.6198779137931034,
+      "offset_1850_1900_k": -0.3573608687647059
+    },
+    "sources": [
+      "HadCRUT.5.1.0.0 analysis global annual"
+    ]
+  },
+  {
+    "id": "S03",
+    "title": "PAGES 2k is not the instrumental target",
+    "claim": "Where both the reconstruction median and the embedded Cowtan and Way target are finite, they differ by more than the rounding of a shared thermometer.",
+    "result": "From 1850 to 2000 the root-mean-square difference is 0.075 K.",
+    "limit": "The reconstruction is an April-March proxy ensemble. It is not substituted for HadCRUT.",
+    "metrics": {
+      "rmse_k": 0.07536984922490843
+    },
+    "sources": [
+      "PAGES2k Full_ensemble_median_and_95pct_range.txt"
+    ]
+  },
+  {
+    "id": "S04",
+    "title": "Northern Hemisphere warming is faster",
+    "claim": "The HadCRUT northern-hemisphere series warms faster than the southern-hemisphere series over 1970-2023.",
+    "result": "The northern slope is 0.276 K per decade and the southern slope is 0.119 K per decade.",
+    "limit": "These are hemisphere averages of one analysis, not independent land and ocean products.",
+    "metrics": {
+      "north_k_per_decade": 0.2758261316012945,
+      "south_k_per_decade": 0.11876887603621061
+    },
+    "sources": [
+      "HadCRUT.5.1.0.0 northern and southern hemisphere annual summaries"
+    ]
+  },
+  {
+    "id": "S05",
+    "title": "Infilling changes coverage, not the existence of empty cells",
+    "claim": "The analysis grid covers more of the map than the non-infilled grid. The non-infilled Arctic mean is only as complete as the cells that were observed.",
+    "result": "In 2010 the mean cell coverage is 0.725 without infilling and 0.993 in the analysis. The non-infilled Arctic overlap mean is 1.756 K with coverage 0.356, against a global area mean of 0.648 K.",
+    "limit": "A higher Arctic number on a sparse grid is not a complete Arctic average.",
+    "metrics": {
+      "noninfilled_coverage_2010": 0.7253392947742263,
+      "analysis_coverage_2010": 0.9929530272281415,
+      "arctic_coverage_2010": 0.35619003333676924
+    },
+    "sources": [
+      "HadCRUT.5.1.0.0 ensemble-mean grids"
+    ]
+  },
+  {
+    "id": "S06",
+    "title": "Pinatubo is visible in the natural-only emulation",
+    "claim": "The 1991-1993 dip is carried by volcanic forcing. The historical emulation includes it. The natural-only emulation also includes it because volcanoes are in that experiment.",
+    "result": "Mean HadCRUT anomaly over 1991-1993 is 0.205 K. The historical emulation is 0.208 K and the natural-only emulation is -0.118 K.",
+    "limit": "Natural-only here is solar plus volcanic effective radiative forcing in the two-box model. It is not a hist-nat simulation.",
+    "metrics": {
+      "hadcrut_1991_1993_k": 0.20497568,
+      "historical_emulation_k": 0.208152067259302,
+      "natural_emulation_k": -0.11805069390216123
+    },
+    "sources": [
+      "IGCC ERF components",
+      "HadCRUT5"
+    ]
+  },
+  {
+    "id": "S07",
+    "title": "Single-forcing fingerprints are collinear and still not DAMIP",
+    "claim": "Least squares on the training window assigns scaling factors to the two-box CO2, aerosol, and natural fingerprints. A shuffled HadCRUT series fits those fingerprints worse.",
+    "result": "Training R2 is 0.713 and the shuffled control R2 is 0.009. The condition number of the training Gram matrix is 702.8.",
+    "limit": "These fingerprints are one emulator with the fitted parameters. They are not hist-GHG, hist-aer, or hist-nat.",
+    "metrics": {
+      "beta_co2": 1.2674858048904005,
+      "beta_aerosol": 0.4797459420998967,
+      "beta_natural": 0.5781050911826039,
+      "train_r2": 0.7133728074192907,
+      "shuffled_r2": 0.008640329850695516,
+      "condition_number": 702.797071406485,
+      "holdout_rmse_k": 0.12381043003558993
+    },
+    "sources": [
+      "IGCC ERF components",
+      "HadCRUT5",
+      "two-box replay"
+    ]
+  },
+  {
+    "id": "S08",
+    "title": "The training optimum is on the prior boundary and loses to persistence",
+    "claim": "The two-box search, confined to the declared prior and blind to 1995-2023, sits on the low-feedback edge. Persistence beats it on the holdout.",
+    "result": "Lambda is 0.501 W m-2 K-1. The particle mean is 0.544, with a 5 to 95 percent range of 0.503 to 0.567. Holdout RMSE is 0.322 K against persistence 0.124 K.",
+    "limit": "An equilibrium sensitivity of 3.93 divided by this lambda is not an assessed ECS. The fit wanted to leave the prior.",
+    "metrics": {
+      "lambda_w_m2_k": 0.500839673423803,
+      "lambda_p05": 0.5034150363447825,
+      "lambda_p95": 0.5667753776412993,
+      "holdout_rmse_k": 0.32226236740971653,
+      "persistence_rmse_k": 0.12419610096136398,
+      "implied_ecs_k": 7.846822463432312
+    },
+    "sources": [
+      "HadCRUT5",
+      "IGCC ERF 1750-2023"
+    ]
+  },
+  {
+    "id": "S09",
+    "title": "A spatial fit beats a uniform trend by a small margin",
+    "claim": "Three seeds trained through 1994 have a lower holdout grid error than a latitude-uniform trend. The seed spread is part of the result. Inverse-RMSE weights favor the better seed without refitting.",
+    "result": "Seed holdout errors are 0.779, 0.740, 0.705. The uniform trend is 0.801 K. Weights are 0.317, 0.333, 0.350.",
+    "limit": "2023 is outside the training forcing radius and is an abstention. This is not a test on a withheld model family.",
+    "metrics": {
+      "seed_holdout_rmse_k": [
+        0.7788525911433812,
+        0.7403649176805654,
+        0.7046104283702163
+      ],
+      "uniform_trend_rmse_k": 0.8009876545184141,
+      "pattern_trend_rmse_k": 0.7976731032405919,
+      "seed_weights": [
+        0.31672120176136964,
+        0.33318586925308563,
+        0.3500929289855448
+      ],
+      "abstained_years": [
+        2023
+      ],
+      "arctic_mean_absolute_error_k": 1.5191629631369108,
+      "tropics_mean_absolute_error_k": 0.4065210710506594,
+      "cell_absolute_error_p95_k": 1.7494756549167847,
+      "global_holdout_rmse_k": 0.7392970156784969
+    },
+    "sources": [
+      "HadCRUT non-infilled grid",
+      "results/grid_campaign.json"
+    ]
+  },
+  {
+    "id": "S10",
+    "title": "Stabilize and decline are different conditional paths",
+    "claim": "Holding the last assessed forcing and declining toward the 1990 forcing do not reach the same 2100 global anomaly. Neither path is an SSP.",
+    "result": "In 2100 the held-forcing path is 2.66 K and the declining path is 1.65 K, both anomalies versus 1961-1990.",
+    "limit": "Both paths use the boundary-value feedback from S08. A different prior would move 2100. No regional field is drawn past the observations.",
+    "metrics": {
+      "stabilize_2100_k": 2.660013280357753,
+      "decline_2100_k": 1.6463687724013438
+    },
+    "sources": [
+      "two-box extension"
+    ]
+  },
+  {
+    "id": "S11",
+    "title": "Four ssp245 files do not share a calendar or a 1961-1990 baseline",
+    "claim": "CanESM5, MIROC6, MPI-ESM1-2-LR, and HadGEM3-GC31-LL were read as annual tas. Their anomalies are against 2015-2019 in each file, which is not 1961-1990.",
+    "result": "By 2020 those anomalies versus each file's 2015-2019 mean are CanESM5 0.33 K (365_day), HadGEM3-GC31-LL 0.10 K (360_day), MIROC6 -0.03 K (gregorian), MPI-ESM1-2-LR -0.00 K (proleptic_gregorian).",
+    "limit": "This is one pathway, ssp245, and one member each. It is not a multi-pathway attribution and it is not comparable to the HadCRUT 1961-1990 anomaly without a further baseline shift that these files do not contain.",
+    "metrics": {
+      "members_2020": [
+        {
+          "file": "tas_Ayr_CanESM5_ssp245_r1i1p1f1_gn_2015-2100.nc",
+          "calendar": "365_day",
+          "anomaly_vs_first_20y_k": 0.33469535289293617
+        },
+        {
+          "file": "tas_Ayr_HadGEM3-GC31-LL_ssp245_r1i1p1f3_gn_2015-2100.nc",
+          "calendar": "360_day",
+          "anomaly_vs_first_20y_k": 0.09895860389877953
+        },
+        {
+          "file": "tas_Ayr_MIROC6_ssp245_r1i1p1f1_gn_2015-2100.nc",
+          "calendar": "gregorian",
+          "anomaly_vs_first_20y_k": -0.027013717799661663
+        },
+        {
+          "file": "tas_Ayr_MPI-ESM1-2-LR_ssp245_r1i1p1f1_gn_2015-2100.nc",
+          "calendar": "proleptic_gregorian",
+          "anomaly_vs_first_20y_k": -0.00022765482617614907
+        }
+      ]
+    },
+    "sources": [
+      "ClimateBench CMIP6.zip ssp245 tas members"
+    ]
+  },
+  {
+    "id": "S12",
+    "title": "Energy inventory is a stock in zettajoules",
+    "claim": "The file named earth_energy_imbalance.csv increases over time and is stored as heat content. It is not the forcing series.",
+    "result": "The inventory total moves from 1.54 ZJ to 473.02 ZJ. The last years in the file are missing and stay missing.",
+    "limit": "A flux would be the time difference divided by area. That derivative is not substituted for the ERF table.",
+    "metrics": {
+      "start_zj": 1.54098582267761,
+      "end_zj": 473.01771324841
+    },
+    "sources": [
+      "IGCC earth_energy_imbalance.csv"
+    ]
+  }
+]

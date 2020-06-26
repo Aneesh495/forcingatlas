@@ -85,7 +85,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="forcing-atlas")
     parser.add_argument(
         "command",
-        choices=["acquire", "calibrate", "hindcast", "scenario", "export-atlas", "walkthrough", "train", "cmip-sample"],
+        choices=["acquire", "calibrate", "hindcast", "scenario", "export-atlas", "walkthrough", "train", "cmip-sample", "studies"],
     )
     parser.add_argument("--particles", type=int, default=16)
     args = parser.parse_args(argv)
@@ -130,6 +130,12 @@ def main(argv: list[str] | None = None) -> int:
         campaign = run_grid_campaign(_root(), campaign_path, epochs=30)
         evidence = write_evidence(_root(), campaign, Path("results/evidence.json"), source_commit=git_head())
         print(json.dumps({"campaign": str(campaign_path), "evidence": str(evidence), "beats_uniform_trend": campaign["beats_uniform_trend"], "seeds": campaign["seeds"]}, indent=2))
+        return 0
+    if args.command == "studies":
+        from forcing_atlas.studies import write_studies
+
+        studies = write_studies(_root(), Path("results/studies.json"))
+        print(json.dumps([{"id": study["id"], "title": study["title"]} for study in studies], indent=2))
         return 0
     if args.command == "cmip-sample":
         from forcing_atlas.catalog import CMIP6_TAS_MEMBERS, cmip6_member_name

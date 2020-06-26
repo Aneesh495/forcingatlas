@@ -56,6 +56,12 @@ The IGCC concentration metadata yaml records an md5 and a size that do not match
 
 `python -m forcing_atlas.cli cmip-sample` reads four ssp245 annual `tas` files out of the ClimateBench zip without storing the zip. Their calendars are 365-day (CanESM5), Gregorian (MIROC6), proleptic Gregorian (MPI-ESM1-2-LR), and 360-day (HadGEM3-GC31-LL). That archive does not contain the other future pathways for those models. They are not filled in.
 
+## Studies
+
+`python -m forcing_atlas.cli studies` writes `results/studies.json`. `docs/THESIS.md` walks through the same twelve calculations. The atlas lists them beside the map. Regenerate the bundle with `python -m forcing_atlas.cli export-atlas` after that command so the page matches the file.
+
+The four ssp245 global series are on the chart as source simulations. Each is an anomaly versus 2015-2019 in its own file. They are not placed on the HadCRUT map, because that map is a 1961-1990 anomaly.
+
 ## Limits
 
-The atlas bundle is still the global hindcast plus the non-infilled map. It does not yet draw the emulator field or the CMIP grids. There is no attribution study and no ten-study thesis. The energy inventory file is heat content in zettajoules even though the filename says imbalance. It is not used as a flux inside the fit.
+The two-box holdout is still worse than persistence, and the fitted feedback is on the edge of the prior. The spatial model beats a uniform trend by a small margin, with much larger Arctic errors than tropical errors. Fingerprint scaling is one emulator, not a DAMIP attribution. The energy inventory file is heat content in zettajoules even though the filename says imbalance. It is not used as a flux inside the fit.

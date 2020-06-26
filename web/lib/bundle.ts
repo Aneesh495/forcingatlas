@@ -57,6 +57,16 @@ export interface AtlasBundle {
     source: string;
   };
   series: SeriesRecord[];
+  studies?: StudyRecord[];
+}
+
+export interface StudyRecord {
+  id: string;
+  title: string;
+  claim: string;
+  result: string;
+  limit: string;
+  sources: string[];
 }
 
 export const SEMANTICS_LABEL: Record<Semantics, string> = {

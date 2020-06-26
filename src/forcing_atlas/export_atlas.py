@@ -11,6 +11,7 @@ from pathlib import Path
 
 import numpy as np
 
+from forcing_atlas.cmip_means import load_ssp245_means
 from forcing_atlas.grids_io import assert_ogl_licence, read_hadcrut_grid
 from forcing_atlas.historical import load_historical_bundle
 from forcing_atlas.product import build_global_product, conditional_extension
@@ -151,5 +152,25 @@ def export_bundle(root: Path, destination: Path, *, particles: int = 24) -> Path
             ),
         ],
     }
+    if (root / "cmip6").is_dir():
+        for row in load_ssp245_means(root / "cmip6"):
+            model = str(row["file"]).split("_")[2]
+            document["series"].append(
+                _series(
+                    f"ssp245-{model}",
+                    "source_simulation",
+                    row["years"],
+                    row["anomaly_k"],
+                    label=f"{model} ssp245",
+                    detail=(
+                        f"Source simulation, annual tas, calendar {row['calendar']}. "
+                        "Anomaly versus 2015-2019 in this file, not versus 1961-1990. "
+                        "One member of one pathway. Not a HadCRUT observation and not a multi-model mean."
+                    ),
+                )
+            )
+    studies_path = Path("results/studies.json")
+    if studies_path.is_file():
+        document["studies"] = json.loads(studies_path.read_text())
     (destination / "atlas.json").write_text(json.dumps(document))
     return destination / "atlas.json"

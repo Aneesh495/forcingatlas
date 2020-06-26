@@ -192,6 +192,7 @@ export function AtlasApp() {
         </section>
         <aside className="border-t border-line p-4 lg:border-l lg:border-t-0">
           <Inspector bundle={bundle} year={year} active={active} cell={cell} gridYear={gridYear} />
+          <Studies studies={bundle.studies ?? []} />
         </aside>
       </div>
     </main>
@@ -204,9 +205,11 @@ function Badge({ semantics }: { semantics: Semantics }) {
       ? "bg-proxy/15 text-proxy"
       : semantics === "emulation"
         ? "bg-clay/15 text-clay"
-        : semantics === "observation"
+        :     semantics === "observation"
           ? "bg-tide/15 text-tide"
-          : "bg-ink/10 text-ink";
+          : semantics === "source_simulation"
+            ? "bg-ink/15 text-ink"
+            : "bg-ink/10 text-ink";
   return <span className={`mt-1 inline-block rounded px-1.5 py-0.5 text-[10px] uppercase tracking-wide ${tone}`}>{SEMANTICS_LABEL[semantics]}</span>;
 }
 
@@ -286,6 +289,24 @@ function Inspector({
       </div>
       <p className="text-xs text-ink/60">{bundle.grid.source}</p>
       <p className="text-xs text-ink/60">{bundle.grid.licence}</p>
+    </div>
+  );
+}
+
+function Studies({ studies }: { studies: { id: string; title: string; result: string; limit: string }[] }) {
+  if (studies.length === 0) return null;
+  return (
+    <div className="mt-6 space-y-3 text-sm">
+      <h2 className="font-serif text-xl">Studies</h2>
+      {studies.map((study) => (
+        <article key={study.id}>
+          <h3 className="font-medium">
+            {study.id}. {study.title}
+          </h3>
+          <p>{study.result}</p>
+          <p className="text-xs text-ink/65">{study.limit}</p>
+        </article>
+      ))}
     </div>
   );
 }

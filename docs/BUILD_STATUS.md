@@ -4,7 +4,7 @@ Updated 2026-11-11.
 
 ## Phase
 
-Grid campaign. Three seeds are trained on the non-infilled HadCRUT grid through 1994 and scored on 1995-2023. The verifier rejects tampered evidence. Four ssp245 source files have been read for their calendars. Attribution, the thesis, and drawing those model grids in the atlas are not done.
+Studies. Twelve linked calculations are in `results/studies.json` and `docs/THESIS.md`, and the atlas bundle carries those notes plus the four ssp245 global series. The ssp245 series use each file's own 2015-2019 baseline, so they are not drawn as HadCRUT anomalies.
 
 ## Requirement index
 
@@ -24,12 +24,12 @@ Grid campaign. Three seeds are trained on the non-infilled HadCRUT grid through 
 | G07 | Calibrated hindcast with a held-out window | verified |
 | G08 | Emulator training, held-out families, three seeds | verified for the HadCRUT year holdout. Model-family transfer is not run |
 | G09 | Regional and tail scores against baselines | verified as area-weighted grid RMSE against a uniform trend. Tail scores are not run |
-| G10 | Attribution with controls and a stated estimand | missing |
-| G11 | Sensitivity, uncertainty decomposition, ensemble weights | missing |
-| G12 | Side-by-side pathways without unsupported layers | missing |
-| G13 | Atlas with legends, time, region drill-down, export parity | implemented_untested |
+| G10 | Attribution with controls and a stated estimand | verified as two-box fingerprint scaling with a shuffled control. DAMIP experiments are not in the local archive |
+| G11 | Sensitivity, uncertainty decomposition, ensemble weights | verified for the lambda particle range and inverse-RMSE seed weights |
+| G12 | Side-by-side pathways without unsupported layers | verified. Stabilize, decline, and ssp245 globals are labeled. The map is not extended |
+| G13 | Atlas with legends, time, region drill-down, export parity | verified against the frozen bundle. ssp245 fields stay off the 1961-1990 map |
 | G14 | Bounded acquisition, restart, disk accounting under the cap | implemented_untested |
-| G15 | Thesis and ten linked studies reconciled to evidence | missing |
+| G15 | Thesis and ten linked studies reconciled to evidence | verified. Twelve studies are in results/studies.json and docs/THESIS.md |
 | G16 | Verifier rejects wrong baseline, fake proxy, member leakage, forcing sign, scenario units | verified |
 
 ## Commands actually run
