@@ -60,7 +60,9 @@ The IGCC concentration metadata yaml records an md5 and a size that do not match
 
 `python -m forcing_atlas.cli studies` writes `results/studies.json`. `docs/THESIS.md` walks through the same twelve calculations. The atlas lists them beside the map. Regenerate the bundle with `python -m forcing_atlas.cli export-atlas` after that command so the page matches the file.
 
-The four ssp245 global series are on the chart as source simulations. Each is an anomaly versus 2015-2019 in its own file. They are not placed on the HadCRUT map, because that map is a 1961-1990 anomaly.
+The four ssp245 global series are on the chart as source simulations. Each is an anomaly versus 2015-2019 in its own file. They are not placed on the HadCRUT map, because that map is a 1961-1990 anomaly. The spatial emulator's three-seed global mean is on the chart as well. 2023 is absent because it is outside the training forcing radius.
+
+The same four models' piControl segments vary by about 0.11 to 0.13 K, while their ssp245 files warm by 1.5 to 2.7 K across an equal-length record. HadGEM3 and MPI write 2015-2100 on the control time axis. Those branch labels are not drawn as historical years. Checksums for the local files are in `results/source_manifest.json`.
 
 ## Limits
 

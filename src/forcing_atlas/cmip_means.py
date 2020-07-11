@@ -41,6 +41,23 @@ def _grid_from_dataset(dataset: xr.Dataset) -> tuple[np.ndarray, LatLonGrid]:
     return field, grid
 
 
+def years_from_time(stamps) -> np.ndarray:
+    """Calendar years from a decoded CMIP time axis.
+
+    numpy datetime64 has no `.year` attribute. cftime objects do. A failed
+    decode must not be relabeled as year 0.
+    """
+
+    values = np.asarray(stamps)
+    if values.size == 0:
+        return np.array([], dtype=np.int64)
+    if np.issubdtype(values.dtype, np.datetime64):
+        return values.astype("datetime64[Y]").astype(np.int64) + 1970
+    if hasattr(values[0], "year"):
+        return np.array([int(stamp.year) for stamp in values], dtype=np.int64)
+    raise ValueError("time axis did not decode to calendar years")
+
+
 def global_anomaly_series(path: Path, *, baseline_years: int = 20) -> dict[str, object]:
     dataset = xr.open_dataset(path)
     try:
@@ -53,13 +70,7 @@ def global_anomaly_series(path: Path, *, baseline_years: int = 20) -> dict[str, 
         anomaly = series - baseline
         time = dataset["time"]
         calendar = str(time.attrs.get("calendar") or time.encoding.get("calendar") or "missing")
-        # Annual files are one sample per model year. The first sample is 2015
-        # when the filename says 2015-2100. The time encoding is recorded, and
-        # the year index is the file order plus 2015 only for that filename pattern.
-        if "2015-2100" in path.name:
-            years = np.arange(2015, 2015 + anomaly.size)
-        else:
-            years = np.arange(anomaly.size)
+        years = years_from_time(time.values)
         return {
             "file": path.name,
             "calendar": calendar,
@@ -75,3 +86,30 @@ def global_anomaly_series(path: Path, *, baseline_years: int = 20) -> dict[str, 
 def load_ssp245_means(directory: Path, *, baseline_years: int = 5) -> list[dict[str, object]]:
     paths = sorted(directory.glob("tas_Ayr_*_ssp245_*.nc"))
     return [global_anomaly_series(path, baseline_years=baseline_years) for path in paths]
+
+
+def control_versus_ssp245(directory: Path) -> list[dict[str, object]]:
+    """Compare each model's piControl spread with its ssp245 change.
+
+    The piControl year labels stay on the model branch. They are not shifted
+    onto 1850-2100. The statistic is the standard deviation of the global
+    annual mean after removing that segment's own mean.
+    """
+
+    rows = []
+    controls = {path.name.split("_")[2]: path for path in directory.glob("tas_Ayr_*_piControl_*.nc")}
+    forced = {path.name.split("_")[2]: path for path in directory.glob("tas_Ayr_*_ssp245_*.nc")}
+    for model in sorted(set(controls) & set(forced)):
+        control = global_anomaly_series(controls[model], baseline_years=5)
+        scenario = global_anomaly_series(forced[model], baseline_years=5)
+        rows.append(
+            {
+                "model": model,
+                "piControl_years": [int(control["years"][0]), int(control["years"][-1])],
+                "piControl_std_k": float(np.std(control["anomaly_k"])),
+                "ssp245_years": [int(scenario["years"][0]), int(scenario["years"][-1])],
+                "ssp245_end_anomaly_k": float(scenario["anomaly_k"][-1]),
+                "calendar": scenario["calendar"],
+            }
+        )
+    return rows

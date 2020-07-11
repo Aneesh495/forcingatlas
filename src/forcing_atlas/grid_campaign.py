@@ -12,6 +12,7 @@ import json
 from pathlib import Path
 
 import numpy as np
+import torch
 
 from forcing_atlas.baselines import linear_trend_forecast
 from forcing_atlas.emulator import TrainConfig, new_emulator, predict, support_radius, train_emulator
@@ -167,3 +168,39 @@ def run_grid_campaign(
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(result, indent=2))
     return result
+
+
+def emulator_global_mean(root: Path, checkpoint_dir: Path) -> tuple[np.ndarray, np.ndarray]:
+    """Area-weighted mean of the saved three-seed ensemble.
+
+    Years outside the training forcing radius are missing, matching the abstention.
+    """
+
+    grid = read_hadcrut_grid(root / "HadCRUT.5.1.0.0.noninfilled.anomalies.ensemble_mean.nc", name="noninfilled")
+    bundle = load_historical_bundle(root)
+    year_to_force = {int(year): index for index, year in enumerate(bundle.years.tolist())}
+    keep = [index for index, year in enumerate(grid.years.tolist()) if int(year) in year_to_force]
+    years = grid.years[keep]
+    areas = grid.grid.cell_areas_m2()
+    weights = areas / np.sum(areas)
+    components = []
+    for name in ("forcing_co2_w_m2", "forcing_aerosol_w_m2", "forcing_solar_w_m2", "forcing_volcanic_w_m2"):
+        series = getattr(bundle, name)
+        components.append(np.array([series[year_to_force[int(year)]] for year in years], dtype=np.float64))
+    forcing = np.column_stack(components)
+    window = _lag_window(forcing, LAGS)
+    latitude = grid.grid.lat / 90.0
+    longitude = grid.grid.lon / 180.0
+    train_index = _indices(years, int(years[0]), TRAIN_END, minimum_index=LAGS - 1)
+    inside = support_radius(forcing[train_index], forcing)
+    predictions = []
+    for seed in SEEDS:
+        model = new_emulator(forcing.shape[1], LAGS, grid.grid.nlat, grid.grid.nlon, seed)
+        checkpoint = torch.load(checkpoint_dir / f"emulator-seed-{seed}.pt", map_location="cpu", weights_only=False)
+        model.load_state_dict(checkpoint["state_dict"])
+        predicted = predict(model, window, forcing, latitude, longitude, weights)
+        predicted = predicted.copy()
+        predicted[~inside] = np.nan
+        predictions.append(predicted)
+    ensemble = np.nanmean(np.stack(predictions, axis=0), axis=0)
+    return years, area_weighted_mean(ensemble, areas)

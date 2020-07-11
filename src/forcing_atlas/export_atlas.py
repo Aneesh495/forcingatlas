@@ -12,6 +12,7 @@ from pathlib import Path
 import numpy as np
 
 from forcing_atlas.cmip_means import load_ssp245_means
+from forcing_atlas.grid_campaign import emulator_global_mean
 from forcing_atlas.grids_io import assert_ogl_licence, read_hadcrut_grid
 from forcing_atlas.historical import load_historical_bundle
 from forcing_atlas.product import build_global_product, conditional_extension
@@ -152,6 +153,22 @@ def export_bundle(root: Path, destination: Path, *, particles: int = 24) -> Path
             ),
         ],
     }
+    checkpoint_dir = Path("results/checkpoints")
+    if all((checkpoint_dir / f"emulator-seed-{seed}.pt").is_file() for seed in (11, 29, 47)):
+        emulator_years, emulator_values = emulator_global_mean(root, checkpoint_dir)
+        document["series"].append(
+            _series(
+                "emulator-ensemble",
+                "emulation",
+                emulator_years,
+                emulator_values,
+                label="Spatial emulator, three-seed mean",
+                detail=(
+                    "Area-weighted mean of the non-infilled grid emulator. "
+                    "Trained through 1994. Years outside the training forcing radius are absent, including 2023."
+                ),
+            )
+        )
     if (root / "cmip6").is_dir():
         for row in load_ssp245_means(root / "cmip6"):
             model = str(row["file"]).split("_")[2]

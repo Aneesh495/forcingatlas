@@ -47,6 +47,8 @@ S11. By 2020, anomalies versus each file's own 2015-2019 mean are 0.33 K for Can
 
 S12. The IGCC energy file rises from 1.54 ZJ to 473.02 ZJ and then has missing years. It is a heat-content stock. It is not the radiative forcing.
 
+S13. The piControl global standard deviations are 0.107 K (CanESM5, branch years 5366-5451), 0.106 K (HadGEM3-GC31-LL), 0.128 K (MIROC6, branch years 3365-3450), and 0.122 K (MPI-ESM1-2-LR). The matching ssp245 files end 2.72 K, 2.67 K, 1.78 K, and 1.46 K above their own 2015-2019 means. HadGEM3 and MPI label the control time axis 2015-2100. Those labels are left as written and are not placed on the historical chart.
+
 ## What this does not settle
 
 The two-box holdout is worse than persistence, and the feedback sits on a prior bound. The spatial model beats a uniform trend only by a small margin, and its Arctic errors are several times the tropical errors. Collinear emulator fingerprints are not a detection and attribution of the historical record in the DAMIP sense. Four ssp245 members do not identify the effect of a mitigation policy.

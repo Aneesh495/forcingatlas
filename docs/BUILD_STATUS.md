@@ -44,4 +44,4 @@ Local `data/raw` holds HadCRUT5.1.0.0 summary series and both ensemble-mean grid
 
 ## Next action
 
-Draw the emulator holdout next to the uniform trend on the atlas, and keep model-family transfer blocked until a pathway other than ssp245 is actually in hand.
+Nothing further is queued from the local files. A pathway other than ssp245, and hist-GHG, hist-aer, or hist-nat, are not in the ClimateBench zip that was read.

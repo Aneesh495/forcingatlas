@@ -10,6 +10,7 @@ const COLORS: Record<string, string> = {
   "ebm-natural": "#6b7c4a",
   "ebm-stabilize": "#8a5a2a",
   "ebm-decline": "#3d6b8a",
+  "emulator-ensemble": "#9a3d5a",
   "ssp245-CanESM5": "#8d3b3b",
   "ssp245-MIROC6": "#355c7d",
   "ssp245-MPI-ESM1-2-LR": "#2f6f4e",

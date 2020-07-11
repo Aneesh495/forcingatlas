@@ -15,7 +15,7 @@ import torch
 
 from forcing_atlas.attribution import fit_scaling, shuffle_observation
 from forcing_atlas.catalog import sources_by_id
-from forcing_atlas.cmip_means import load_ssp245_means
+from forcing_atlas.cmip_means import control_versus_ssp245, load_ssp245_means
 from forcing_atlas.ebm import InitialAnomaly, integrate
 from forcing_atlas.emulator import new_emulator, predict, support_radius
 from forcing_atlas.forcing_adapter import build_forcing
@@ -181,6 +181,7 @@ def run_studies(root: Path) -> list[dict]:
     seed_weights = seed_weights / np.sum(seed_weights)
     tails = _regional_tail(root)
     cmip = [row for row in load_ssp245_means(root / "cmip6")] if (root / "cmip6").is_dir() else []
+    controls = control_versus_ssp245(root / "cmip6") if (root / "cmip6").is_dir() else []
     extension = conditional_extension(
         product.parameters,
         full_years,
@@ -338,6 +339,21 @@ def run_studies(root: Path) -> list[dict]:
                 "end_zj": float(context["inventory"].values[np.isfinite(context["inventory"].values)][-1]),
             },
             ["IGCC earth_energy_imbalance.csv"],
+        ),
+        _study(
+            "S13",
+            "piControl spread is much smaller than the ssp245 change",
+            "Each model's own preindustrial-control global mean varies by about a tenth of a kelvin, while its ssp245 file warms by more than a kelvin across the same length of record.",
+            "Control standard deviations and ssp245 end anomalies versus 2015-2019, or versus the first five years of a branch that is not 2015, are "
+            + ", ".join(
+                f"{row['model']} control std {row['piControl_std_k']:.3f} K (years {row['piControl_years'][0]}-{row['piControl_years'][1]}) "
+                f"and ssp245 end {row['ssp245_end_anomaly_k']:.2f} K"
+                for row in controls
+            )
+            + ".",
+            "HadGEM3 and MPI piControl files carry a time coordinate that reads 2015-2100. Those numbers are branch labels in the file, not historical years, and they are not drawn on the 1850-2100 chart. One member is not a model-family distribution.",
+            {"models": controls},
+            ["ClimateBench CMIP6.zip tas piControl and ssp245"],
         ),
     ]
     return studies

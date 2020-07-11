@@ -1,0 +1,220 @@
+{
+  "files": [
+    {
+      "dataset_id": "hadcrut5-analysis-global-annual",
+      "present": true,
+      "semantics": "observational_analysis",
+      "file_name": "HadCRUT.5.1.0.0.analysis.summary_series.global.annual.csv",
+      "bytes": 7048,
+      "sha256": "16633b8d7c4fe6026d53549f509355964ab56ca689a6f007f27d4a5fa87d6ec6",
+      "license_id": "ogl-v3.0"
+    },
+    {
+      "dataset_id": "hadcrut5-analysis-northern_hemisphere-annual",
+      "present": true,
+      "semantics": "observational_analysis",
+      "file_name": "HadCRUT.5.1.0.0.analysis.summary_series.northern_hemisphere.annual.csv",
+      "bytes": 7045,
+      "sha256": "e0858baebbb98bbb853adbedb7c15b51174f542cc305f2e482f366f64ae0f91a",
+      "license_id": "ogl-v3.0"
+    },
+    {
+      "dataset_id": "hadcrut5-analysis-southern_hemisphere-annual",
+      "present": true,
+      "semantics": "observational_analysis",
+      "file_name": "HadCRUT.5.1.0.0.analysis.summary_series.southern_hemisphere.annual.csv",
+      "bytes": 7056,
+      "sha256": "0dbae8c861b5c1bde5ce3d140c65ea35e31077f721ab7ab7926e9a6e04561661",
+      "license_id": "ogl-v3.0"
+    },
+    {
+      "dataset_id": "hadcrut5-noninfilled-global-annual",
+      "present": true,
+      "semantics": "observation",
+      "file_name": "HadCRUT.5.1.0.0.noninfilled.summary_series.global.annual.csv",
+      "bytes": 7063,
+      "sha256": "af15798dd436d262c119bfa48f1d62cac8ab0d65b0626d96cfbfc252e18d211e",
+      "license_id": "ogl-v3.0"
+    },
+    {
+      "dataset_id": "hadcrut5-analysis-global-ensemble-annual",
+      "present": true,
+      "semantics": "observational_analysis",
+      "file_name": "HadCRUT.5.1.0.0.analysis.ensemble_series.global.annual.csv",
+      "bytes": 413905,
+      "sha256": "23b39d9af380de08e8dcaf1b82c43e2f97a9823936220245616f9232757c3376",
+      "license_id": "ogl-v3.0"
+    },
+    {
+      "dataset_id": "hadcrut5-analysis-ensemble-mean-grid",
+      "present": true,
+      "semantics": "observational_analysis",
+      "file_name": "HadCRUT.5.1.0.0.analysis.anomalies.ensemble_mean.nc",
+      "bytes": 32829594,
+      "sha256": "80009e64ad1cd545eeec9d4457ae191d311a4ad3cd488fcf3ed7f61be3819f88",
+      "license_id": "ogl-v3.0"
+    },
+    {
+      "dataset_id": "hadcrut5-noninfilled-ensemble-mean-grid",
+      "present": true,
+      "semantics": "observation",
+      "file_name": "HadCRUT.5.1.0.0.noninfilled.anomalies.ensemble_mean.nc",
+      "bytes": 24107871,
+      "sha256": "e227ff688a67420f701072947a40edab8d5c1d0d591fec0b4f7a209d8aa29e82",
+      "license_id": "ogl-v3.0"
+    },
+    {
+      "dataset_id": "berkeley-land-ocean-complete",
+      "present": true,
+      "semantics": "observational_analysis",
+      "file_name": "Land_and_Ocean_complete.txt",
+      "bytes": 416532,
+      "sha256": "e2d57dc0efc309e1b9879bab2bf95ce93a4e8e162ccf2c8eb5b090c07378dd56",
+      "license_id": "cc-by-nc-4.0"
+    },
+    {
+      "dataset_id": "pages2k-2019-ensemble-summary",
+      "present": true,
+      "semantics": "proxy_reconstruction",
+      "file_name": "Full_ensemble_median_and_95pct_range.txt",
+      "bytes": 115698,
+      "sha256": "4a98e9a2741d61e58a8565a43a7bb365ecb231f62cb3d8b526644d33101f6de1",
+      "license_id": "noaa-paleoclimatology-citation"
+    },
+    {
+      "dataset_id": "igcc-erf-components-1750-2023",
+      "present": true,
+      "semantics": "forcing_assessment",
+      "file_name": "ERF_best_1750-2023.csv",
+      "bytes": 185951,
+      "sha256": "870a5ba225d1f553130c6149bdf885765f854354389890156fb9e22a202af402",
+      "license_id": "cc-by-4.0"
+    },
+    {
+      "dataset_id": "igcc-erf-aggregates-1750-2023",
+      "present": true,
+      "semantics": "forcing_assessment",
+      "file_name": "ERF_best_aggregates_1750-2023.csv",
+      "bytes": 95619,
+      "sha256": "ae6ca3b60abc0662c44f0bae520c8ceb53e16ef82176315aefd9730610341df4",
+      "license_id": "cc-by-4.0"
+    },
+    {
+      "dataset_id": "igcc-erf-aggregates-p05",
+      "present": true,
+      "semantics": "forcing_assessment",
+      "file_name": "ERF_p05_aggregates_1750-2023.csv",
+      "bytes": 101809,
+      "sha256": "196cbd0df12b8b42d8a7ef65ee2b80e59d914eead870f85eda2297b9ed5b9afc",
+      "license_id": "cc-by-4.0"
+    },
+    {
+      "dataset_id": "igcc-erf-aggregates-p95",
+      "present": true,
+      "semantics": "forcing_assessment",
+      "file_name": "ERF_p95_aggregates_1750-2023.csv",
+      "bytes": 99610,
+      "sha256": "b3e9cb636e75c6f93cb3bd3e0f9e498b554d63362f9f15548f113343a8516c0e",
+      "license_id": "cc-by-4.0"
+    },
+    {
+      "dataset_id": "igcc-ghg-concentrations",
+      "present": true,
+      "semantics": "forcing_assessment",
+      "file_name": "ghg_concentrations.csv",
+      "bytes": 82839,
+      "sha256": "ce066f25c546ad1a4dbb7cdbab15d9f3eab4049d26552847967b4d71298d4c8e",
+      "license_id": "cc-by-4.0"
+    },
+    {
+      "dataset_id": "igcc-ghg-emissions-gwp100",
+      "present": true,
+      "semantics": "emission_inventory",
+      "file_name": "greenhouse_gas_emissions_co2eq.csv",
+      "bytes": 18396,
+      "sha256": "7e6ac2c80ff39ae9d023768bfd501665738c19b79f5d23d12a74541e48658140",
+      "license_id": "cc-by-4.0"
+    },
+    {
+      "dataset_id": "igcc-energy-inventory",
+      "present": true,
+      "semantics": "energy_inventory",
+      "file_name": "earth_energy_imbalance.csv",
+      "bytes": 9553,
+      "sha256": "72edeb43e9d971ae4c0647323e015e8c9cd54d9f14a900fe9f3ef02daebaf277",
+      "license_id": "cc-by-4.0"
+    },
+    {
+      "dataset_id": "tas_Ayr_CanESM5_piControl_r1i1p1f1_gn_5366-5451.nc",
+      "present": true,
+      "semantics": "source_simulation",
+      "file_name": "cmip6/tas_Ayr_CanESM5_piControl_r1i1p1f1_gn_5366-5451.nc",
+      "bytes": 2823292,
+      "sha256": "b6e3ee2faffbcde214f35ef72e864138d8b8295b9fdee38f85f9ff0f2d80f148",
+      "license_id": "cc-by-4.0"
+    },
+    {
+      "dataset_id": "tas_Ayr_CanESM5_ssp245_r1i1p1f1_gn_2015-2100.nc",
+      "present": true,
+      "semantics": "source_simulation",
+      "file_name": "cmip6/tas_Ayr_CanESM5_ssp245_r1i1p1f1_gn_2015-2100.nc",
+      "bytes": 2823296,
+      "sha256": "bbaf9b55339abcab6b20d57f6b27c8051a1c62f5e11fb95122218e0904b3b21c",
+      "license_id": "cc-by-4.0"
+    },
+    {
+      "dataset_id": "tas_Ayr_HadGEM3-GC31-LL_piControl_r1i1p1f1_gn_2015-2100.nc",
+      "present": true,
+      "semantics": "source_simulation",
+      "file_name": "cmip6/tas_Ayr_HadGEM3-GC31-LL_piControl_r1i1p1f1_gn_2015-2100.nc",
+      "bytes": 9516464,
+      "sha256": "c8c0fbf315c1ad4bcf6c100bd66f7c4951c1aa2ffa620092c0d96bd333652cbb",
+      "license_id": "cc-by-4.0"
+    },
+    {
+      "dataset_id": "tas_Ayr_HadGEM3-GC31-LL_ssp245_r1i1p1f3_gn_2015-2100.nc",
+      "present": true,
+      "semantics": "source_simulation",
+      "file_name": "cmip6/tas_Ayr_HadGEM3-GC31-LL_ssp245_r1i1p1f3_gn_2015-2100.nc",
+      "bytes": 9516468,
+      "sha256": "0d953e1df4b3f089c4866bc6fea69fad6c9b4529b06084a65c06e78b6eba76bc",
+      "license_id": "cc-by-4.0"
+    },
+    {
+      "dataset_id": "tas_Ayr_MIROC6_piControl_r1i1p1f1_gn_3365-3450.nc",
+      "present": true,
+      "semantics": "source_simulation",
+      "file_name": "cmip6/tas_Ayr_MIROC6_piControl_r1i1p1f1_gn_3365-3450.nc",
+      "bytes": 11277928,
+      "sha256": "82f4d5b0cf3f20fd0b08dd595fa9a87c403bc8ca7f4289eceaacd6b242877069",
+      "license_id": "cc-by-4.0"
+    },
+    {
+      "dataset_id": "tas_Ayr_MIROC6_ssp245_r1i1p1f1_gn_2015-2100.nc",
+      "present": true,
+      "semantics": "source_simulation",
+      "file_name": "cmip6/tas_Ayr_MIROC6_ssp245_r1i1p1f1_gn_2015-2100.nc",
+      "bytes": 11277932,
+      "sha256": "4e4f944ee85116db64667ab9c85c84b5543c4d960f33af89330f1ac67fb9383c",
+      "license_id": "cc-by-4.0"
+    },
+    {
+      "dataset_id": "tas_Ayr_MPI-ESM1-2-LR_piControl_r1i1p1f1_gn_2015-2100.nc",
+      "present": true,
+      "semantics": "source_simulation",
+      "file_name": "cmip6/tas_Ayr_MPI-ESM1-2-LR_piControl_r1i1p1f1_gn_2015-2100.nc",
+      "bytes": 6345816,
+      "sha256": "5fe8f414c629d6d2a200d6f7add4b49c951b2fccb7a5fdc07ce7c8477f0b4c95",
+      "license_id": "cc-by-4.0"
+    },
+    {
+      "dataset_id": "tas_Ayr_MPI-ESM1-2-LR_ssp245_r1i1p1f1_gn_2015-2100.nc",
+      "present": true,
+      "semantics": "source_simulation",
+      "file_name": "cmip6/tas_Ayr_MPI-ESM1-2-LR_ssp245_r1i1p1f1_gn_2015-2100.nc",
+      "bytes": 6345824,
+      "sha256": "1f1d7939e200830024a1f487fb381ff0f298d65bae1e3ce00f6660b5cf3308b6",
+      "license_id": "cc-by-4.0"
+    }
+  ]
+}

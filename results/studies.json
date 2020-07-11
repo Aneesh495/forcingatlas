@@ -219,5 +219,75 @@
     "sources": [
       "IGCC earth_energy_imbalance.csv"
     ]
+  },
+  {
+    "id": "S13",
+    "title": "piControl spread is much smaller than the ssp245 change",
+    "claim": "Each model's own preindustrial-control global mean varies by about a tenth of a kelvin, while its ssp245 file warms by more than a kelvin across the same length of record.",
+    "result": "Control standard deviations and ssp245 end anomalies versus 2015-2019, or versus the first five years of a branch that is not 2015, are CanESM5 control std 0.107 K (years 5366-5451) and ssp245 end 2.72 K, HadGEM3-GC31-LL control std 0.106 K (years 2015-2100) and ssp245 end 2.67 K, MIROC6 control std 0.128 K (years 3365-3450) and ssp245 end 1.78 K, MPI-ESM1-2-LR control std 0.122 K (years 2015-2100) and ssp245 end 1.46 K.",
+    "limit": "HadGEM3 and MPI piControl files carry a time coordinate that reads 2015-2100. Those numbers are branch labels in the file, not historical years, and they are not drawn on the 1850-2100 chart. One member is not a model-family distribution.",
+    "metrics": {
+      "models": [
+        {
+          "model": "CanESM5",
+          "piControl_years": [
+            5366,
+            5451
+          ],
+          "piControl_std_k": 0.1074844320042666,
+          "ssp245_years": [
+            2015,
+            2100
+          ],
+          "ssp245_end_anomaly_k": 2.7239769658435193,
+          "calendar": "365_day"
+        },
+        {
+          "model": "HadGEM3-GC31-LL",
+          "piControl_years": [
+            2015,
+            2100
+          ],
+          "piControl_std_k": 0.10630238353022768,
+          "ssp245_years": [
+            2015,
+            2100
+          ],
+          "ssp245_end_anomaly_k": 2.667923169920698,
+          "calendar": "360_day"
+        },
+        {
+          "model": "MIROC6",
+          "piControl_years": [
+            3365,
+            3450
+          ],
+          "piControl_std_k": 0.12766723662453028,
+          "ssp245_years": [
+            2015,
+            2100
+          ],
+          "ssp245_end_anomaly_k": 1.7813448463326154,
+          "calendar": "gregorian"
+        },
+        {
+          "model": "MPI-ESM1-2-LR",
+          "piControl_years": [
+            2015,
+            2100
+          ],
+          "piControl_std_k": 0.12165799314809946,
+          "ssp245_years": [
+            2015,
+            2100
+          ],
+          "ssp245_end_anomaly_k": 1.4610015920558794,
+          "calendar": "proleptic_gregorian"
+        }
+      ]
+    },
+    "sources": [
+      "ClimateBench CMIP6.zip tas piControl and ssp245"
+    ]
   }
 ]
